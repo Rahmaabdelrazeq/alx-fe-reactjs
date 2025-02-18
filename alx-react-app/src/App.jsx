@@ -32,6 +32,16 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
     </>
+  
+        <div>
+            <Header />
+            <MainContent />
+            <Footer />
+        </div>
+    );
+}
+
+export default App;
   )
 }
 
