@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Footer = () => {
+function Footer() {
   return (
-    <footer style={{ backgroundColor: 'navy', color: 'white', textAlign: 'center', padding: '10px', marginTop: '20px' }}>
-      <p>&copy; 2023 My Favorite Cities. All rights reserved.</p>
+    <footer style={{ backgroundColor: '#333', color: 'white', textAlign: 'center', padding: '10px', marginTop: '15px' }}>
+      <p style={{ margin: 0 }}>© 2025 My React App. All rights reserved.</p>
     </footer>
   );
-};
+}
 
 export default Footer;
