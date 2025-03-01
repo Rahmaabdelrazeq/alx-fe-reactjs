@@ -1,15 +1,15 @@
 import useRecipeStore from '../recipeStore';
 
 const RecipeList = () => {
-  const recipes = useRecipeStore((state) => state.recipes);
+  const filteredRecipes = useRecipeStore((state) => state.filteredRecipes);
 
   return (
     <div>
       <h2>Recipes</h2>
-      {recipes.length === 0 ? (
-        <p>No recipes found. Add a recipe to get started!</p>
+      {filteredRecipes.length === 0 ? (
+        <p>No recipes found. Try a different search term!</p>
       ) : (
-        recipes.map((recipe) => (
+        filteredRecipes.map((recipe) => (
           <div
             key={recipe.id}
             style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}
