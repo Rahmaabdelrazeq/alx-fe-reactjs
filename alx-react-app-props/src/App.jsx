@@ -7,6 +7,8 @@ import UserProfile from './components/UserProfile';
 import MainContent from './components/MainContent';
 import Footer from './components/Footer';
 import Counter from './components/Counter';
+import ProfilePage from './ProfilePage';
+import UserContext from './UserContext';
 import './App.css'
 
 function App() {
@@ -32,6 +34,9 @@ function App() {
       <Counter />
       <MainContent />
       <Footer />
+      <UserContext.Provider value={userData}>
+      <ProfilePage />
+    </UserContext.Provider>
     </div>
       <h1>Vite + React</h1>
       <div className="card">
