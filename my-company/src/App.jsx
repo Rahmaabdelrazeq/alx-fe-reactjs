@@ -3,11 +3,13 @@ import Home from './Home';
 import About from './About';
 import Services from './Services';
 import Contact from './Contact';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <Router>
       <div>
+        <Navbar />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
