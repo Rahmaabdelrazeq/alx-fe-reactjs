@@ -6,12 +6,19 @@ const RecipeList = () => {
   return (
     <div>
       <h2>Recipes</h2>
-      {recipes.map((recipe) => (
-        <div key={recipe.id} style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}>
-          <h3>{recipe.title}</h3>
-          <p>{recipe.description}</p>
-        </div>
-      ))}
+      {recipes.length === 0 ? (
+        <p>No recipes found. Add a recipe to get started!</p>
+      ) : (
+        recipes.map((recipe) => (
+          <div
+            key={recipe.id}
+            style={{ marginBottom: '20px', borderBottom: '1px solid #ccc', paddingBottom: '10px' }}
+          >
+            <h3>{recipe.title}</h3>
+            <p>{recipe.description}</p>
+          </div>
+        ))
+      )}
     </div>
   );
 };
