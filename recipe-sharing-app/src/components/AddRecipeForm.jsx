@@ -41,6 +41,12 @@ const AddRecipeForm = ({ onSuccess }) => {
     
     if (onSuccess) onSuccess();
   };
+
+
+
+  (newRecipes) => set(() => ({
+    recipes: newRecipes
+}))
   
   return (
     <div className="bg-gray-50 p-6 rounded-lg shadow-md">
