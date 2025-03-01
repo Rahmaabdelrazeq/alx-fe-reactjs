@@ -7,6 +7,7 @@ import FavoritesList from './components/FavoritesList';
 import EditRecipeForm from './components/EditRecipeForm';
 import SearchBar from './components/SearchBar';
 import RecommendationsList from './components/RecommendationsList';
+import RecipeList from './components/RecipeList';
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path="/edit-recipe" element={<EditRecipeForm />} />
         <Route path="/search" element={<SearchBar />} />
         <Route path="/recommendations" element={<RecommendationsList />} />
+        <Route path="/recipelist" element={<RecipeList />} />
       </Routes>
     </Router>
   );
