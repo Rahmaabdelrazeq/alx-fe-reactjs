@@ -1,15 +1,18 @@
 import React, { useState } from 'react';
 import { useRecipeStore } from './recipeStore';
+import { useNavigate } from 'react-router-dom';
 
 const DeleteRecipeButton = ({ recipeId, onSuccess }) => {
   const [showConfirm, setShowConfirm] = useState(false);
   const deleteRecipe = useRecipeStore((state) => state.deleteRecipe);
+  const navigate = useNavigate();
   
   const handleDelete = () => {
     deleteRecipe(recipeId);
     setShowConfirm(false);
     if (onSuccess) onSuccess();
   };
+  
   
   return (
     <div>
@@ -27,6 +30,7 @@ const DeleteRecipeButton = ({ recipeId, onSuccess }) => {
           >
             Cancel
           </button>
+          
         </div>
       ) : (
         <button
