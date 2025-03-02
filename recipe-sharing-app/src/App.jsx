@@ -26,4 +26,18 @@ const App = () => {
   );
 };
 
+
+const recipes = [
+  { id: 1, title: 'Pasta', description: 'Delicious pasta', ingredients: ['flour', 'eggs'], instructions: 'Mix and cook' },
+  { id: 2, title: 'Pizza', description: 'Tasty pizza', ingredients: ['dough', 'cheese'], instructions: 'Bake in oven' },
+];
+
+const searchTerm = 'pasta';
+const filtered = recipes.filter((recipe) =>
+  recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
+);
+
+console.log(filtered); 
+
+
 export default App;

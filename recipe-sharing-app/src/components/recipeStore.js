@@ -1,28 +1,19 @@
-import { create } from 'zustand';
-import { v4 as uuidv4 } from 'uuid';
+import create from 'zustand';
 
-export const useRecipeStore = create((set) => ({
-    recipes: [],
-
-    // Add a new recipe
-    addRecipe: (recipe) => set((state) => ({
-        recipes: [...state.recipes, { id: uuidv4(), ...recipe }]
-    })),
-
-    // Update an existing recipe
-    updateRecipe: (id, updatedRecipe) => set((state) => ({
-        recipes: state.recipes.map((recipe) =>
-            recipe.id === id ? { ...recipe, ...updatedRecipe } : recipe
-        )
-    })),
-
-    // Delete a recipe
-    deleteRecipe: (id) => set((state) => ({
-        recipes: state.recipes.filter((recipe) => recipe.id !== id)
-    })),
-
-    // Set the entire recipes array (new addition)
-    setRecipes: (newRecipes) => set(() => ({
-        recipes: newRecipes
-    }))
+const useRecipeStore = create(set => ({
+  recipes: [],
+  searchTerm: '',
+  setSearchTerm: (term) => set({ searchTerm: term }),
+  filteredRecipes: (state) =>
+    state.recipes.filter(recipe =>
+      recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase())
+    ),
 }));
+
+filteredRecipes: (state) =>
+    state.recipes.filter(recipe =>
+      recipe.title.toLowerCase().includes(state.searchTerm.toLowerCase()) &&
+      (state.selectedIngredients.length === 0 || state.selectedIngredients.every(ing => recipe.ingredients.includes(ing))) &&
+      (state.maxPrepTime ? recipe.prepTime <= state.maxPrepTime : true)
+    )
+  
