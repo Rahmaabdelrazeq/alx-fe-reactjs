@@ -7,6 +7,7 @@ const App = () => {
   const { setRecipes } = useRecipeStore();
 
   useEffect(() => {
+    // Mock API call
     const fetchedRecipes = [
       { id: 1, title: 'Spaghetti Carbonara', description: 'Classic Italian pasta dish' },
       { id: 2, title: 'Avocado Toast', description: 'Healthy and delicious breakfast option' },

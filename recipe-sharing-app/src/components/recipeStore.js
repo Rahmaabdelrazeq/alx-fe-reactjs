@@ -2,31 +2,25 @@ import { create } from 'zustand';
 
 const useRecipeStore = create((set, get) => ({
   recipes: [],
-  favorites: [],
-  recommendations: [],
+  searchTerm: '',
+  filteredRecipes: [],
 
-  addFavorite: (recipeId) => {
-    if (!get().favorites.includes(recipeId)) {
-      set((state) => ({ favorites: [...state.favorites, recipeId] }));
-    }
+  setRecipes: (recipeList) => {
+    set({ recipes: recipeList, filteredRecipes: recipeList });
   },
 
-  removeFavorite: (recipeId) => {
-    set((state) => ({
-      favorites: state.favorites.filter((id) => id !== recipeId),
-    }));
+  setSearchTerm: (term) => {
+    set({ searchTerm: term });
+    get().filterRecipes();
   },
 
-  generateRecommendations: () => {
-    const { recipes, favorites } = get();
-    const recommended = recipes.filter(
-      (recipe) =>
-        favorites.includes(recipe.id) && Math.random() > 0.3 
+  filterRecipes: () => {
+    const { recipes, searchTerm } = get();
+    const filtered = recipes.filter((recipe) =>
+      recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    set({ recommendations: recommended });
+    set({ filteredRecipes: filtered });
   },
-
-  setRecipes: (recipeList) => set({ recipes: recipeList }),
 }));
 
 export default useRecipeStore;
