@@ -1,73 +1,70 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-function Counter() {
+const Counter = () => {
+  // State to store the count value
   const [count, setCount] = useState(0);
 
   return (
-    <div style={{ 
-      textAlign: 'center', 
-      margin: '20px', 
-      padding: '20px', 
-      borderRadius: '8px', 
-      backgroundColor: '#f0f0f0',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+    <div style={{
+      textAlign: "center",
+      margin: "20px",
+      padding: "20px",
+      border: "2px solid #333",
+      borderRadius: "10px",
+      backgroundColor: "#f9f9f9",
+      width: "300px",
+      marginLeft: "auto",
+      marginRight: "auto"
     }}>
-      <h2 style={{ color: '#333' }}>Counter Application</h2>
+      <h2>Simple Counter</h2>
+      <p style={{ fontSize: "24px", fontWeight: "bold" }}>Current Count: {count}</p>
       
-      <p style={{ 
-        fontSize: '24px', 
-        fontWeight: 'bold', 
-        margin: '20px',
-        color: count > 0 ? 'green' : count < 0 ? 'red' : 'black'
-      }}>
-        Current Count: {count}
-      </p>
-      
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-        <button 
-          onClick={() => setCount(count + 1)}
-          style={{ 
-            padding: '8px 16px', 
-            backgroundColor: '#4CAF50', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Increment
-        </button>
-        
-        <button 
-          onClick={() => setCount(count - 1)}
-          style={{ 
-            padding: '8px 16px', 
-            backgroundColor: '#f44336', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Decrement
-        </button>
-        
-        <button 
-          onClick={() => setCount(0)}
-          style={{ 
-            padding: '8px 16px', 
-            backgroundColor: '#2196F3', 
-            color: 'white', 
-            border: 'none', 
-            borderRadius: '4px',
-            cursor: 'pointer'
-          }}
-        >
-          Reset
-        </button>
-      </div>
+      <button 
+        onClick={() => setCount(count + 1)}
+        style={{
+          margin: "5px",
+          padding: "10px",
+          fontSize: "16px",
+          cursor: "pointer",
+          backgroundColor: "green",
+          color: "white",
+          border: "none",
+          borderRadius: "5px"
+        }}>
+        Increment
+      </button>
+
+      <button 
+        onClick={() => setCount(count - 1)}
+        style={{
+          margin: "5px",
+          padding: "10px",
+          fontSize: "16px",
+          cursor: "pointer",
+          backgroundColor: "red",
+          color: "white",
+          border: "none",
+          borderRadius: "5px"
+        }}>
+        Decrement
+      </button>
+
+      <button 
+        onClick={() => setCount(0)}
+        style={{
+          margin: "5px",
+          padding: "10px",
+          fontSize: "16px",
+          cursor: "pointer",
+          backgroundColor: "gray",
+          color: "white",
+          border: "none",
+          borderRadius: "5px"
+        }}>
+        Reset
+      </button>
     </div>
   );
-}
+};
 
 export default Counter;
