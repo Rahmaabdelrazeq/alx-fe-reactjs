@@ -5,6 +5,7 @@ import Footer from './Footer';
 import Counter from './components/Counter';
 import ProfilePage from "./ProfilePage";
 import UserContext from "./UserContext";
+import UserProfile from './components/UserProfile';
 
 function App() {
   return (
@@ -23,6 +24,8 @@ function App() {
       <UserContext.Provider value={userData}>
       <ProfilePage />
     </UserContext.Provider>
+    <UserProfile />
+    <UserContext />
     </div>
   );
 }
