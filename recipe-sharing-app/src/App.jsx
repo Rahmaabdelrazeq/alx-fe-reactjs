@@ -1,43 +1,42 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import RecipeDetails from './components/RecipeDetails';
-import AddRecipeForm from './components/AddRecipeForm';
-import DeleteRecipeButton from './components/DeleteRecipeButton';
+import React, { useEffect } from 'react';
+import useRecipeStore from './stores/recipeStore';
 import FavoritesList from './components/FavoritesList';
-import EditRecipeForm from './components/EditRecipeForm';
-import SearchBar from './components/SearchBar';
 import RecommendationsList from './components/RecommendationsList';
-import RecipeList from './components/RecipeList';
 
 const App = () => {
+  const { setRecipes, addFavorite, removeFavorite, favorites, recipes } = useRecipeStore();
+
+  useEffect(() => {
+    // Mock API call to fetch recipes
+    const fetchedRecipes = [
+      { id: 1, title: 'Spaghetti Carbonara', description: 'Classic Italian pasta dish' },
+      { id: 2, title: 'Avocado Toast', description: 'Healthy and delicious breakfast option' },
+      { id: 3, title: 'Chicken Curry', description: 'Spicy and creamy Indian curry' },
+    ];
+    setRecipes(fetchedRecipes);
+  }, [setRecipes]);
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/RecipeDetails" element={<RecipeDetails />} />
-        <Route path="/add-recipe" element={<AddRecipeForm />} />
-        <Route path="/delete-recipe" element={<DeleteRecipeButton />} />
-        <Route path="/favorites" element={<FavoritesList />} />
-        <Route path="/edit-recipe" element={<EditRecipeForm />} />
-        <Route path="/search" element={<SearchBar />} />
-        <Route path="/recommendations" element={<RecommendationsList />} />
-        <Route path="/recipelist" element={<RecipeList />} />
-      </Routes>
-    </Router>
+    <div>
+      <h1>Recipe Sharing App</h1>
+
+      <h2>All Recipes</h2>
+      {recipes.map((recipe) => (
+        <div key={recipe.id}>
+          <h3>{recipe.title}</h3>
+          <p>{recipe.description}</p>
+          {favorites.includes(recipe.id) ? (
+            <button onClick={() => removeFavorite(recipe.id)}>Remove from Favorites</button>
+          ) : (
+            <button onClick={() => addFavorite(recipe.id)}>Add to Favorites</button>
+          )}
+        </div>
+      ))}
+
+      <FavoritesList />
+      <RecommendationsList />
+    </div>
   );
 };
-
-
-const recipes = [
-  { id: 1, title: 'Pasta', description: 'Delicious pasta', ingredients: ['flour', 'eggs'], instructions: 'Mix and cook' },
-  { id: 2, title: 'Pizza', description: 'Tasty pizza', ingredients: ['dough', 'cheese'], instructions: 'Bake in oven' },
-];
-
-const searchTerm = 'pasta';
-const filtered = recipes.filter((recipe) =>
-  recipe.title.toLowerCase().includes(searchTerm.toLowerCase())
-);
-
-console.log(filtered); 
-
 
 export default App;
