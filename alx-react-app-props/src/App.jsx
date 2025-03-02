@@ -7,6 +7,7 @@ import ProfilePage from "./ProfilePage";
 import UserContext from "./UserContext";
 import UserProfile from './components/UserProfile';
 
+
 function App() {
   return (
     <div style={{
@@ -31,3 +32,10 @@ function App() {
 }
 
 export default App;
+
+function UserProfile() {
+  const userData = useContext(UserContext); 
+
+  return <p>Name: {userData.name}</p>;
+}
+
