@@ -10,7 +10,7 @@ const TodoList = () => {
 
   const addTodo = (e) => {
     e.preventDefault();
-    if (newTodo.trim() === '') return;
+    if (newTodo.trim() === '') return; // Prevent empty todos
     const todo = { id: Date.now(), text: newTodo, completed: false };
     setTodos([...todos, todo]);
     setNewTodo('');
@@ -30,7 +30,7 @@ const TodoList = () => {
 
   return (
     <div>
-      <h1>Todo List</h1>
+      <h2>Todo List</h2>
       <form onSubmit={addTodo}>
         <input
           type="text"
