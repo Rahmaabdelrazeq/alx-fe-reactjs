@@ -1,7 +1,9 @@
+import UserProfile from "./components/UserProfile";
+
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-3xl font-bold text-blue-600">Hello, Tailwind CSS!</h1>
+    <div className="flex justify-center items-center min-h-screen bg-gray-200">
+      <UserProfile />
     </div>
   );
 }
