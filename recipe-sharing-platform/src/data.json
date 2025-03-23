@@ -3,19 +3,17 @@
       "id": 1,
       "title": "Spaghetti Carbonara",
       "summary": "A classic Italian pasta dish with eggs, cheese, bacon, and black pepper.",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "ingredients": ["200g spaghetti", "2 eggs", "50g Parmesan cheese", "100g bacon", "Salt & black pepper"],
+      "instructions": ["Boil the spaghetti.", "Fry the bacon.", "Mix eggs and cheese.", "Combine everything and serve."]
     },
     {
       "id": 2,
       "title": "Chicken Tikka Masala",
-      "summary": "Chunks of grilled chicken (tikka) cooked in a smooth buttery & creamy tomato-based gravy.",
-      "image": "https://via.placeholder.com/150"
-    },
-    {
-      "id": 3,
-      "title": "Sushi Rolls",
-      "summary": "Traditional Japanese sushi rolls made with fresh fish and rice.",
-      "image": "https://via.placeholder.com/150"
+      "summary": "Chunks of grilled chicken cooked in a smooth creamy tomato sauce.",
+      "image": "https://via.placeholder.com/150",
+      "ingredients": ["500g chicken", "1 cup yogurt", "2 tbsp tikka masala spice", "1 onion", "1 can tomato puree"],
+      "instructions": ["Marinate the chicken.", "Grill the chicken.", "Fry onions and add tomato puree.", "Mix everything and serve."]
     }
   ]
   
