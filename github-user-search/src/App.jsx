@@ -1,47 +1,23 @@
-import { useState } from 'react';
-import SearchBar from './components/SearchBar';
-import UserCard from './components/UserCard';
-import { fetchGitHubUser } from './services/githubService';
-
-function App() {
-    const [user, setUser] = useState(null);
-
-    const handleSearch = async (username) => {
-        const userData = await fetchGitHubUser(username);
-        setUser(userData);
-    };
-
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-            <h1 className="text-2xl font-bold mb-4">GitHub User Search</h1>
-            <SearchBar onSearch={handleSearch} />
-            {user && <UserCard user={user} />}
-        </div>
-    );
-}
-
-export default App;
-
 import { useState } from "react";
 import Search from "./components/Search";
 import UserCard from "./components/UserCard";
-import { fetchUserData } from "./services/githubService";
+import { fetchUsers } from "./services/githubService";
 
 function App() {
-    const [user, setUser] = useState(null);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
-    const handleSearch = async (username) => {
+    const handleSearch = async (username, location, minRepos) => {
         setLoading(true);
         setError(false);
-        setUser(null);
+        setUsers([]);
 
-        const userData = await fetchUserData(username);
+        const userData = await fetchUsers(username, location, minRepos);
         setLoading(false);
 
         if (userData) {
-            setUser(userData);
+            setUsers(userData);
         } else {
             setError(true);
         }
@@ -52,9 +28,14 @@ function App() {
             <h1 className="text-2xl font-bold mb-4">GitHub User Search</h1>
             <Search onSearch={handleSearch} />
             {loading && <p className="text-gray-500 mt-4">Loading...</p>}
-            {error && <p className="text-red-500 mt-4">Looks like we can't find the user.</p>}
-            {user && <UserCard user={user} />}
+            {error && <p className="text-red-500 mt-4">Something went wrong. Please try again.</p>}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mt-6">
+                {users.map((user) => (
+                    <UserCard key={user.id} user={user} />
+                ))}
+            </div>
         </div>
     );
 }
 
+export default App;
