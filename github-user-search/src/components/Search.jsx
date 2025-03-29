@@ -1,43 +1,65 @@
 import { useState } from "react";
+import fetchUserData from "../services/githubService";
 
-const Search = ({ onSearch }) => {
-    const [username, setUsername] = useState("");
-    const [location, setLocation] = useState("");
-    const [minRepos, setMinRepos] = useState("");
+const Search = ({ setUsers, setLoading, setError }) => {
+  const [username, setUsername] = useState("");
+  const [location, setLocation] = useState("");
+  const [repos, setRepos] = useState("");
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        onSearch(username, location, minRepos);
-    };
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    
+    try {
+      const query = [];
+      if (username) query.push(`${username} in:login`);
+      if (location) query.push(`location:${location}`);
+      if (repos) query.push(`repos:>${repos}`);
 
-    return (
-        <form onSubmit={handleSubmit} className="flex flex-col items-center space-y-4 bg-white p-6 rounded-lg shadow-md w-full max-w-lg">
-            <input
-                type="text"
-                placeholder="GitHub Username..."
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="border p-2 rounded-md w-full"
-            />
-            <input
-                type="text"
-                placeholder="Location (Optional)..."
-                value={location}
-                onChange={(e) => setLocation(e.target.value)}
-                className="border p-2 rounded-md w-full"
-            />
-            <input
-                type="number"
-                placeholder="Min Repositories (Optional)..."
-                value={minRepos}
-                onChange={(e) => setMinRepos(e.target.value)}
-                className="border p-2 rounded-md w-full"
-            />
-            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded-md w-full">
-                Search
-            </button>
-        </form>
-    );
+      const queryString = query.join("+");
+      const results = await fetchUserData(queryString);
+      setUsers(results);
+    } catch (error) {
+      setError("Looks like we can't find the user.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="p-6 bg-gray-800 text-white rounded-lg shadow-md">
+      <form onSubmit={handleSearch} className="grid gap-4 md:grid-cols-3">
+        <input
+          type="text"
+          placeholder="GitHub Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          className="p-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none"
+        />
+        <input
+          type="text"
+          placeholder="Location (e.g., USA)"
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+          className="p-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none"
+        />
+        <input
+          type="number"
+          placeholder="Min Repositories"
+          value={repos}
+          onChange={(e) => setRepos(e.target.value)}
+          className="p-2 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none"
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 hover:bg-blue-600 text-white p-2 rounded-lg"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default Search;
